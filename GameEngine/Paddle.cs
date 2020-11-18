@@ -4,19 +4,17 @@ using Raylib_cs;
 
 namespace GameEngine
 {
-  public class Paddle
+  public class Paddle: GameObject
   {
-    public static List<Paddle> paddles = new List<Paddle>();
-
-    public Rectangle rect = new Rectangle();
-
+    
+    
     public KeyboardKey upKey;
     public KeyboardKey downKey;
 
 
     public Paddle(float x, float y, KeyboardKey upKey, KeyboardKey downKey)
     {
-      paddles.Add(this);
+      gameObjects.Add(this);
 
       this.rect.height = 50;
       this.rect.width = 20;
@@ -27,7 +25,7 @@ namespace GameEngine
       this.downKey = downKey;
     }
 
-    public void Update()
+    public override void Update()
     {
       if (Raylib.IsKeyDown(upKey))
       {
@@ -38,27 +36,5 @@ namespace GameEngine
         this.rect.y += 3f;
       }
     }
-
-    public void Draw()
-    {
-      Raylib.DrawRectangleRec(this.rect, Color.BLACK);
-    }
-
-    public static void DrawAll()
-    {
-      foreach (Paddle p in paddles)
-      {
-        p.Draw();
-      }
-    }
-
-    public static void UpdateAll()
-    {
-      foreach (Paddle p in paddles)
-      {
-        p.Update();
-      }
-    }
-
   }
 }

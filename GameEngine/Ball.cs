@@ -3,21 +3,27 @@ using Raylib_cs;
 
 namespace GameEngine
 {
-  public class Ball
+  public class Ball: GameObject
   {
-    public Rectangle rect = new Rectangle(800 / 2 - 10, 600 / 2 - 10, 20, 20);
-
     float xMovement = 2f;
     float yMovement = 2f;
 
-    public void Update()
+    public Ball()
+    {
+      rect.width = 20;
+      rect.height = 20;
+
+      gameObjects.Add(this);
+    }
+
+    public override void Update()
     {
       rect.x += xMovement;
       rect.y += yMovement;
 
-      for (int i = 0; i < Paddle.paddles.Count; i++)
+      for (int i = 0; i < Paddle.gameObjects.Count; i++)
       {
-        if (Raylib.CheckCollisionRecs(rect, Paddle.paddles[i].rect))
+        if (Raylib.CheckCollisionRecs(rect, Paddle.gameObjects[i].rect))
         {
           xMovement = -xMovement;
         }
@@ -35,11 +41,5 @@ namespace GameEngine
         xMovement = -xMovement;
       }
     }
-
-    public void Draw()
-    {
-      Raylib.DrawRectangleRec(rect, Color.BLACK);
-    }
-
   }
 }

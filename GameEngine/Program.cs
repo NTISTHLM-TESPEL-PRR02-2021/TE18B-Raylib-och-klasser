@@ -20,15 +20,13 @@ namespace GameEngine
       while (!Raylib.WindowShouldClose())
       {
 
-        Paddle.UpdateAll();
-        ball.Update();
+        GameObject.UpdateAll();
 
         Raylib.BeginDrawing();
 
         Raylib.ClearBackground(Color.GOLD);
 
-        Paddle.DrawAll();
-        ball.Draw();
+        GameObject.DrawAll();
 
         Raylib.EndDrawing();
 
